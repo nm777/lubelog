@@ -106,6 +106,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler("/Home/Error");
 
+var pathBase = builder.Configuration["PathBase"] ?? "";
+pathBase = "/" + pathBase.Trim('/');
+app.UsePathBase(pathBase);
+
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -114,6 +118,7 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/images",
     OnPrepareResponse = ctx =>
     {
+        Console.WriteLine($"Images Request Path: {ctx.Context.Request.Path}");
         if (ctx.Context.Request.Path.StartsWithSegments("/images"))
         {
             ctx.Context.Response.Headers.Append("Cache-Control", "no-store");
@@ -131,6 +136,7 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/documents",
     OnPrepareResponse = ctx =>
     {
+        Console.WriteLine($"Documents Request Path: {ctx.Context.Request.Path}");
         if (ctx.Context.Request.Path.StartsWithSegments("/documents"))
         {
             ctx.Context.Response.Headers.Append("Cache-Control", "no-store");
@@ -154,6 +160,7 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/temp",
     OnPrepareResponse = ctx =>
     {
+        Console.WriteLine($"Temp Request Path: {ctx.Context.Request.Path}");
         if (ctx.Context.Request.Path.StartsWithSegments("/temp"))
         {
             ctx.Context.Response.Headers.Append("Cache-Control", "no-store");

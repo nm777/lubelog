@@ -14,6 +14,7 @@
     var automaticDecimalFormat = userConfig.AutomaticDecimalFormat;
     var shortDatePattern = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
     var firstDayOfWeek = (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+    var pathBase = config.PathBase;
     var numberFormat = CultureInfo.CurrentCulture.NumberFormat;
     var userLanguage = userConfig.UserLanguage;
     shortDatePattern = shortDatePattern.ToLower();
@@ -64,7 +65,8 @@
                 currencySymbol: decodeHTMLEntities("@numberFormat.CurrencySymbol"),
                 useThreeDecimals: "@useThreeDecimals" == "True",
                 useMPG: "@useMPG" == "True",
-                firstDayOfWeek: @firstDayOfWeek
+                firstDayOfWeek: @firstDayOfWeek,
+                pathBase: @pathBase
             }
         }
         function getShortDatePattern() {

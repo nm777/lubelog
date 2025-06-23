@@ -8,6 +8,7 @@ namespace CarCareTracker.Helper
 {
     public interface IConfigHelper
     {
+        string PathBase { get; }
         OpenIDConfig GetOpenIDConfig();
         ReminderUrgencyConfig GetReminderUrgencyConfig();
         MailConfig GetMailConfig();
@@ -35,7 +36,7 @@ namespace CarCareTracker.Helper
         private readonly IUserConfigDataAccess _userConfig;
         private readonly ILogger<IConfigHelper> _logger;
         private IMemoryCache _cache;
-        public ConfigHelper(IConfiguration serverConfig, 
+        public ConfigHelper(IConfiguration serverConfig,
             IUserConfigDataAccess userConfig,
             IMemoryCache memoryCache,
             ILogger<IConfigHelper> logger)
@@ -44,7 +45,10 @@ namespace CarCareTracker.Helper
             _userConfig = userConfig;
             _cache = memoryCache;
             _logger = logger;
+            PathBase = "/" + (_config["PathBase"] ?? "").Trim('/');
+            _logger.LogInformation($"PathBase: {PathBase}");
         }
+        public string PathBase { get; }
         public string GetWebHookUrl()
         {
             var webhook = CheckString("LUBELOGGER_WEBHOOK");
@@ -89,7 +93,7 @@ namespace CarCareTracker.Helper
         }
         public string GetLogoUrl()
         {
-            var logoUrl = CheckString("LUBELOGGER_LOGO_URL", "/defaults/lubelogger_logo.png");
+            var logoUrl = CheckString("LUBELOGGER_LOGO_URL", $"{_pathBase}/defaults/lubelogger_logo.png");
             return logoUrl;
         }
         public string GetAllowedFileUploadExtensions()
