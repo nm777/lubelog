@@ -15,7 +15,7 @@ function hideAddVehicleModal() {
 }
 //refreshable function to reload Garage PartialView
 function loadGarage() {
-    $.get(getGlobalConfig().pathBase + '/Home/Garage', function (data) {
+    $.get(`${pathBase}/Home/Garage`, function (data) {
         $("#garageContainer").html(data);
         loadSettings();
         bindTabEvent();
