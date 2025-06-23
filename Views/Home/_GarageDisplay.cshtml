@@ -6,6 +6,7 @@
     var userConfig = config.GetUserConfig(User);
     var userLanguage = userConfig.UserLanguage;
     var recordTags = Model.SelectMany(x => x.Tags).Distinct();
+    var pathBase = config.PathBase;
 }
 @if (recordTags.Any())
 {
@@ -83,7 +84,7 @@
         }
     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 garage-item-add user-select-none">
             <div class="card" onclick="showAddVehicleModal()" style="height:100%;">
-                <img src="@(userConfig.PathBase)/defaults/addnew_vehicle.png" style="object-fit:scale-down;height:100%;pointer-events:none;" />
+                <img src="@pathBase/defaults/addnew_vehicle.png" style="object-fit:scale-down;height:100%;pointer-events:none;" />
             </div>
         </div>
     </div>
