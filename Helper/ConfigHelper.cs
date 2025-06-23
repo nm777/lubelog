@@ -93,7 +93,7 @@ namespace CarCareTracker.Helper
         }
         public string GetLogoUrl()
         {
-            var logoUrl = CheckString("LUBELOGGER_LOGO_URL", $"{_pathBase}/defaults/lubelogger_logo.png");
+            var logoUrl = CheckString("LUBELOGGER_LOGO_URL", $"{PathBase}/defaults/lubelogger_logo.png");
             return logoUrl;
         }
         public string GetAllowedFileUploadExtensions()
