@@ -115,7 +115,7 @@ app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
            Path.Combine(builder.Environment.ContentRootPath, "data", "images")),
-    RequestPath = "/images",
+    RequestPath = "images",
     OnPrepareResponse = ctx =>
     {
         Console.WriteLine($"Images Request Path: {ctx.Context.Request.Path}");
@@ -133,7 +133,7 @@ app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
            Path.Combine(builder.Environment.ContentRootPath, "data", "documents")),
-    RequestPath = "/documents",
+    RequestPath = "documents",
     OnPrepareResponse = ctx =>
     {
         Console.WriteLine($"Documents Request Path: {ctx.Context.Request.Path}");
@@ -151,13 +151,13 @@ app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
            Path.Combine(builder.Environment.ContentRootPath, "data", "translations")),
-    RequestPath = "/translations"
+    RequestPath = "translations"
 });
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
            Path.Combine(builder.Environment.ContentRootPath, "data", "temp")),
-    RequestPath = "/temp",
+    RequestPath = "temp",
     OnPrepareResponse = ctx =>
     {
         Console.WriteLine($"Temp Request Path: {ctx.Context.Request.Path}");
