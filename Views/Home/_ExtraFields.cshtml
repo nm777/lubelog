@@ -131,7 +131,7 @@
         });
     }
     function updateExtraFields() {
-        $.post('/Home/UpdateExtraFields', { id: importMode, extraFields: extraFields }, function (data) {
+        $.post(`${pathBase}/Home/UpdateExtraFields`, { id: importMode, extraFields: extraFields }, function (data) {
             if (data) {
                 $("#extraFieldModalContent").html(data);
             } else {

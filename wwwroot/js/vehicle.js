@@ -237,7 +237,7 @@ function deleteVehicle(vehicleId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post('/Vehicle/DeleteVehicle', { vehicleId: vehicleId }, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteVehicle`, { vehicleId: vehicleId }, function (data) {
                 if (data) {
                     window.location.href = '/Home';
                 }
@@ -247,14 +247,14 @@ function deleteVehicle(vehicleId) {
 }
 function showAddReminderModal(reminderModalInput) {
     if (reminderModalInput != undefined) {
-        $.post('/Vehicle/GetAddReminderRecordPartialView', { reminderModel: reminderModalInput }, function (data) {
+        $.post(`${pathBase}/Vehicle/GetAddReminderRecordPartialView`, { reminderModel: reminderModalInput }, function (data) {
             $("#reminderRecordModalContent").html(data);
             initDatePicker($('#reminderDate'), true);
             initTagSelector($("#reminderRecordTag"));
             $("#reminderRecordModal").modal("show");
         });
     } else {
-        $.post('/Vehicle/GetAddReminderRecordPartialView', function (data) {
+        $.post(`${pathBase}/Vehicle/GetAddReminderRecordPartialView`, function (data) {
             $("#reminderRecordModalContent").html(data);
             initDatePicker($('#reminderDate'), true);
             initTagSelector($("#reminderRecordTag"));
@@ -321,7 +321,7 @@ function moveRecord(recordId, source, dest) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post('/Vehicle/MoveRecord', { recordId: recordId, source: source, destination: dest }, function (data) {
+            $.post(`${pathBase}/Vehicle/MoveRecord`, { recordId: recordId, source: source, destination: dest }, function (data) {
                 if (data) {
                     hideModalCallBack();
                     successToast("Record Moved");
@@ -378,7 +378,7 @@ function editMultipleRecords(ids, dataType) {
     if (ids.length < 2) {
         return;
     }
-    $.post('/Vehicle/GetGenericRecordModal', { recordIds: ids, dataType: dataType }, function (data) {
+    $.post(`${pathBase}/Vehicle/GetGenericRecordModal`, { recordIds: ids, dataType: dataType }, function (data) {
         if (data) {
             $("#genericRecordEditModalContent").html(data);
             initDatePicker($('#genericRecordDate'));
@@ -411,7 +411,7 @@ function saveGenericRecord() {
             break;
     }
     //save to db.
-    $.post('/Vehicle/EditMultipleRecords', { genericRecordEditModel: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/EditMultipleRecords`, { genericRecordEditModel: formValues }, function (data) {
         if (data) {
             successToast(formValues.recordIds.length > 1 ? "Records Updated" : "Record Updated.");
             hideGenericRecordModal();
@@ -560,7 +560,7 @@ function adjustRecordsOdometer(ids, source) {
     }).then((result) => {
         if (result.isConfirmed) {
             saveScrollPosition();
-            $.post('/Vehicle/AdjustRecordsOdometer', { recordIds: ids, vehicleId: GetVehicleId().vehicleId, importMode: source }, function (data) {
+            $.post(`${pathBase}/Vehicle/AdjustRecordsOdometer`, { recordIds: ids, vehicleId: GetVehicleId().vehicleId, importMode: source }, function (data) {
                 if (data) {
                     successToast(`${ids.length} Record(s) Updated`);
                     var vehicleId = GetVehicleId().vehicleId;
@@ -603,7 +603,7 @@ function getAndValidateSelectedRecurringReminder() {
             return {
                 hasError: false,
                 ids: selectedRecurringRemindersArray.map(x=>x.value),
-                text: selectedRecurringRemindersArray.map(x=>x.text) 
+                text: selectedRecurringRemindersArray.map(x=>x.text)
             }
         }
     } else {

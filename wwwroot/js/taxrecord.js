@@ -83,7 +83,7 @@ function saveTaxRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveTaxRecordToVehicleId', { taxRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveTaxRecordToVehicleId`, { taxRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Tax Record Updated" : "Tax Record Added.");
             hideAddTaxRecordModal();
@@ -189,7 +189,7 @@ function getAndValidateTaxRecordValues() {
 
 function checkRecurringTaxes() {
     let vehicleId = GetVehicleId().vehicleId
-    $.post('/Vehicle/CheckRecurringTaxRecords', { vehicleId: vehicleId }, function (data) {
+    $.post(`${pathBase}/Vehicle/CheckRecurringTaxRecords`, { vehicleId: vehicleId }, function (data) {
         if (data) {
             //notify users that recurring tax records were updated and they should refresh the page to see the new changes.
             infoToast(`Recurring Tax Records Updated!<br /><br /><a class='text-link' style='cursor:pointer;' onclick='viewVehicle(${vehicleId})'>Refresh to see new records</a>`);

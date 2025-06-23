@@ -113,7 +113,7 @@ function savePlanRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SavePlanRecordToVehicleId', { planRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SavePlanRecordToVehicleId`, { planRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Plan Record Updated" : "Plan Record Added.");
             hideAddPlanRecordModal();
@@ -191,7 +191,7 @@ function savePlanRecordTemplate(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SavePlanRecordTemplateToVehicleId', { planRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SavePlanRecordTemplateToVehicleId`, { planRecord: formValues }, function (data) {
         if (data.success) {
             if (isEdit) {
                 hideAddPlanRecordModal();
@@ -308,7 +308,7 @@ function updatePlanRecordProgress(newProgress) {
                 if (result.isConfirmed) {
                     //Odometer Adjustments
                     var adjustedOdometer = GetAdjustedOdometer(0, result.value.odometer);
-                    $.post('/Vehicle/UpdatePlanRecordProgress', { planRecordId: draggedId, planProgress: newProgress, odometer: adjustedOdometer }, function (data) {
+                    $.post(`${pathBase}/Vehicle/UpdatePlanRecordProgress`, { planRecordId: draggedId, planProgress: newProgress, odometer: adjustedOdometer }, function (data) {
                         if (data) {
                             successToast("Plan Progress Updated");
                             var vehicleId = GetVehicleId().vehicleId;
@@ -321,7 +321,7 @@ function updatePlanRecordProgress(newProgress) {
                 draggedId = 0;
             });
         } else {
-            $.post('/Vehicle/UpdatePlanRecordProgress', { planRecordId: draggedId, planProgress: newProgress }, function (data) {
+            $.post(`${pathBase}/Vehicle/UpdatePlanRecordProgress`, { planRecordId: draggedId, planProgress: newProgress }, function (data) {
                 if (data) {
                     successToast("Plan Progress Updated");
                     var vehicleId = GetVehicleId().vehicleId;

@@ -40,7 +40,7 @@
 </div>
 <script>
     function deleteCollaborator(userId, vehicleId) {
-        $.post('/Vehicle/DeleteCollaboratorFromVehicle', {userId: userId, vehicleId: vehicleId}, function(data){
+        $.post(`${pathBase}/Vehicle/DeleteCollaboratorFromVehicle`, {userId: userId, vehicleId: vehicleId}, function(data){
             if (data) {
                 successToast('Collaborator Removed');
                 refreshCollaborators();
@@ -67,7 +67,7 @@
         }).then(function (result) {
             if (result.isConfirmed) {
                 var vehicleId = GetVehicleId().vehicleId;
-                $.post('/Vehicle/AddCollaboratorsToVehicle', { username: result.value.userName, vehicleId: vehicleId }, function (data) {
+                $.post(`${pathBase}/Vehicle/AddCollaboratorsToVehicle`, { username: result.value.userName, vehicleId: vehicleId }, function (data) {
                     if (data.success) {
                         successToast(data.message);
                         refreshCollaborators();

@@ -71,7 +71,7 @@ function saveNoteToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveNoteToVehicleId', { note: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveNoteToVehicleId`, { note: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Note Updated" : "Note Added.");
             hideAddNoteModal();
@@ -115,7 +115,7 @@ function getAndValidateNoteValues() {
     }
 }
 function pinNotes(ids, toggle, pinStatus) {
-    $.post('/Vehicle/PinNotes', { noteIds: ids, isToggle: toggle, pinStatus: pinStatus  }, function (data) {
+    $.post(`${pathBase}/Vehicle/PinNotes`, { noteIds: ids, isToggle: toggle, pinStatus: pinStatus  }, function (data) {
         if (data) {
             successToast(ids.length > 1 ? `${ids.length} Notes Updated` : "Note Updated.");
             getVehicleNotes(GetVehicleId().vehicleId);

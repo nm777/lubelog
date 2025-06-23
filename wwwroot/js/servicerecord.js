@@ -75,7 +75,7 @@ function saveServiceRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveServiceRecordToVehicleId', { serviceRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveServiceRecordToVehicleId`, { serviceRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Service Record Updated" : "Service Record Added.");
             hideAddServiceRecordModal();

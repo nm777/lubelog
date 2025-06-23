@@ -24,7 +24,7 @@ function getCheckedTabs() {
 }
 function deleteLanguage() {
     var languageFileLocation = `/translations/${$("#defaultLanguage").val()}.json`;
-    $.post('/Files/DeleteFiles', { fileLocation: languageFileLocation }, function (data) {
+    $.post(`${pathBase}/Files/DeleteFiles`, { fileLocation: languageFileLocation }, function (data) {
         //reset user language back to en_US
         $("#defaultLanguage").val('en_US');
         updateSettings();
@@ -86,7 +86,7 @@ function updateSettings() {
         enableRootUserOIDC: enableRootUserOIDC
     }
     sloader.show();
-    $.post('/Home/WriteToSettings', { userConfig: userConfigObject }, function (data) {
+    $.post(`${pathBase}/Home/WriteToSettings`, { userConfig: userConfigObject }, function (data) {
         sloader.hide();
         if (data) {
             setTimeout(function () { window.location.href = '/Home/Index?tab=settings' }, 500);
@@ -112,7 +112,7 @@ function sendTestEmail() {
         },
     }).then(function (result) {
         if (result.isConfirmed) {
-            $.post('/Home/SendTestEmail', { emailAddress: result.value.emailRecipient }, function (data) {
+            $.post(`${pathBase}/Home/SendTestEmail`, { emailAddress: result.value.emailRecipient }, function (data) {
                 if (data.success) {
                     successToast(data.message);
                 } else {
@@ -172,7 +172,7 @@ function restoreBackup(event) {
         type: 'POST',
         success: function (response) {
             if (response.trim() != '') {
-                $.post('/Files/RestoreBackup', { fileName: response }, function (data) {
+                $.post(`${pathBase}/Files/RestoreBackup`, { fileName: response }, function (data) {
                     sloader.hide();
                     if (data) {
                         console.log('LubeLogger - DB Restoration Completed');
@@ -247,7 +247,7 @@ function saveTranslation() {
         },
     }).then(function (result) {
         if (result.isConfirmed) {
-            $.post('/Home/SaveTranslation', { userLanguage: result.value.translationFileName, translationData: translationData }, function (data) {
+            $.post(`${pathBase}/Home/SaveTranslation`, { userLanguage: result.value.translationFileName, translationData: translationData }, function (data) {
                 if (data.success) {
                     successToast("Translation Updated");
                     updateSettings();
@@ -269,7 +269,7 @@ function exportTranslation(){
         errorToast(genericErrorMessage());
         return;
     }
-    $.post('/Home/ExportTranslation', { translationData: translationData }, function (data) {
+    $.post(`${pathBase}/Home/ExportTranslation`, { translationData: translationData }, function (data) {
         if (!data) {
             errorToast(genericErrorMessage());
         } else {
@@ -400,7 +400,7 @@ function hideCustomWidgets() {
     $("#customWidgetModal").modal('hide');
 }
 function saveCustomWidgets() {
-    $.post('/Home/SaveCustomWidgets', { widgetsData: $("#widgetEditor").val() }, function (data) {
+    $.post(`${pathBase}/Home/SaveCustomWidgets`, { widgetsData: $("#widgetEditor").val() }, function (data) {
         if (data) {
             successToast("Custom Widgets Saved!");
             updateSettings();
@@ -410,7 +410,7 @@ function saveCustomWidgets() {
     })
 }
 function deleteCustomWidgets() {
-    $.post('/Home/DeleteCustomWidgets', function (data) {
+    $.post(`${pathBase}/Home/DeleteCustomWidgets`, function (data) {
         if (data) {
             successToast("Custom Widgets Deleted!");
             updateSettings();

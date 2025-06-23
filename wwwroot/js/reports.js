@@ -141,7 +141,7 @@ function updateCheck() {
 function refreshMPGChart() {
     var vehicleId = GetVehicleId().vehicleId;
     var year = getYear();
-    $.post('/Vehicle/GetMonthMPGByVehicle', {vehicleId: vehicleId, year: year}, function (data) {
+    $.post(`${pathBase}/Vehicle/GetMonthMPGByVehicle`, {vehicleId: vehicleId, year: year}, function (data) {
         $("#monthFuelMileageReportContent").html(data);
     })
 }
@@ -208,7 +208,7 @@ function refreshBarChart() {
         selectedMetrics.push('OdometerRecord');
     }
 
-    $.post('/Vehicle/GetCostByMonthByVehicle',
+    $.post(`${pathBase}/Vehicle/GetCostByMonthByVehicle`,
         {
             vehicleId: vehicleId,
             selectedMetrics: selectedMetrics,
@@ -243,7 +243,7 @@ function showBarChartTable(elemClicked) {
         selectedMetrics.push('OdometerRecord');
     }
 
-    $.post('/Vehicle/GetCostByMonthAndYearByVehicle',
+    $.post(`${pathBase}/Vehicle/GetCostByMonthAndYearByVehicle`,
         {
             vehicleId: vehicleId,
             selectedMetrics: selectedMetrics,
@@ -359,7 +359,7 @@ function exportAttachments() {
     }).then(function (result) {
         if (result.isConfirmed) {
             var vehicleId = GetVehicleId().vehicleId;
-            $.post('/Vehicle/GetVehicleAttachments', { vehicleId: vehicleId, exportTabs: result.value.selectedTabs }, function (data) {
+            $.post(`${pathBase}/Vehicle/GetVehicleAttachments`, { vehicleId: vehicleId, exportTabs: result.value.selectedTabs }, function (data) {
                 if (data.success) {
                     window.location.href = data.message;
                 } else {
@@ -400,7 +400,7 @@ function performGlobalSearch() {
     } else {
         $('#globalSearchInput').removeClass('is-invalid');
     }
-    $.post('/Vehicle/SearchRecords', { vehicleId: GetVehicleId().vehicleId, searchQuery: searchQuery }, function (data) {
+    $.post(`${pathBase}/Vehicle/SearchRecords`, { vehicleId: GetVehicleId().vehicleId, searchQuery: searchQuery }, function (data) {
         $('#globalSearchModalResults').html(data);
     });
 }

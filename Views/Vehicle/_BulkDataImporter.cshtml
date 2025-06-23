@@ -43,7 +43,7 @@
         var vehicleId = GetVehicleId().vehicleId;
         var mode = "@Model";
         sloader.show();
-        $.post('/Vehicle/ImportToVehicleIdFromCsv', { vehicleId: vehicleId, mode: mode, fileName: uploadedFile }, function (data) {
+        $.post(`${pathBase}/Vehicle/ImportToVehicleIdFromCsv`, { vehicleId: vehicleId, mode: mode, fileName: uploadedFile }, function (data) {
             sloader.hide();
             if (data) {
                 successToast("Data Imported Successfully");

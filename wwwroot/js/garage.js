@@ -165,7 +165,7 @@ function initCalendar() {
     });
 }
 function performLogOut() {
-    $.post('/Login/LogOut', function (data) {
+    $.post(`${pathBase}/Login/LogOut`, function (data) {
         if (data) {
             window.location.href = data;
         }
@@ -331,7 +331,7 @@ function copyContributors(sourceVehicleId, destVehicleId) {
         confirmButtonColor: "#0d6efd"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post('/Vehicle/DuplicateVehicleCollaborators', { sourceVehicleId: sourceVehicleId, destVehicleId: destVehicleId }, function (data) {
+            $.post(`${pathBase}/Vehicle/DuplicateVehicleCollaborators`, { sourceVehicleId: sourceVehicleId, destVehicleId: destVehicleId }, function (data) {
                 if (data.success) {
                     successToast("Collaborators Copied");
                     loadGarage();
@@ -380,7 +380,7 @@ function validateAndSaveRootUserAccount() {
         userName: $('#inputUsername').val(),
         password: $('#inputPassword').val()
     }
-    $.post('/Login/CreateLoginCreds', { credentials: userAccountInfo }, function (data) {
+    $.post(`${pathBase}/Login/CreateLoginCreds`, { credentials: userAccountInfo }, function (data) {
         if (data) {
             //hide modal
             hideAccountInformationModal();
@@ -425,7 +425,7 @@ function validateAndSaveUserAccount() {
         emailAddress: $('#inputEmail').val(),
         token: $('#inputToken').val()
     }
-    $.post('/Home/UpdateUserAccount', { userAccount: userAccountInfo }, function (data) {
+    $.post(`${pathBase}/Home/UpdateUserAccount`, { userAccount: userAccountInfo }, function (data) {
         if (data.success) {
             //hide modal
             hideAccountInformationModal();
@@ -437,7 +437,7 @@ function validateAndSaveUserAccount() {
     });
 }
 function generateTokenForUser() {
-    $.post('/Home/GenerateTokenForUser', function (data) {
+    $.post(`${pathBase}/Home/GenerateTokenForUser`, function (data) {
         if (data) {
             successToast('Token sent');
         } else {

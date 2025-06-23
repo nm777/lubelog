@@ -23,7 +23,10 @@
                     <div class="input-group">
                         <input type="text" id="inputToken" class="form-control">
                         <div class="input-group-text">
-                            <button type="button" class="btn btn-sm text-secondary password-visible-button" onclick="sendOpenIdRegistrationToken()"><i class="bi bi-send"></i></button>
+                            <button type="button"
+                                class="btn btn-sm text-secondary password-visible-button"
+                                onclick="sendOpenIdRegistrationToken()"><i
+                                    class="bi bi-send"></i></button>
                         </div>
                     </div>
                 }
@@ -34,13 +37,18 @@
             </div>
             <div class="form-group">
                 <label for="inputUserName">@translator.Translate(userLanguage, "Username")</label>
-                <input type="text" id="inputUserName" class="form-control" value="@Model" onkeyup="callBackOnEnter(event, performOpenIdRegistration)">
+                <input type="text" id="inputUserName" class="form-control" value="@Model"
+                    onkeyup="callBackOnEnter(event, performOpenIdRegistration)">
             </div>
             <div class="d-grid">
-                <button type="button" class="btn btn-warning mt-2" onclick="performOpenIdRegistration()"><i class="bi bi-box-arrow-in-right me-2"></i>@translator.Translate(userLanguage, "Register")</button>
+                <button type="button" class="btn btn-warning mt-2"
+                    onclick="performOpenIdRegistration()"><i
+                        class="bi bi-box-arrow-in-right me-2"></i>@translator.Translate(userLanguage,
+                                        "Register")</button>
             </div>
             <div class="d-grid">
-                <a href="/Login/Index" class="btn btn-link mt-2">@translator.Translate(userLanguage, "Back to Login")</a>
+                <a href="/Login/Index" class="btn btn-link mt-2">@translator.Translate(userLanguage,
+                                        "Back to Login")</a>
             </div>
         </div>
     </div>
@@ -50,7 +58,7 @@
         var token = $("#inputToken").val();
         var userName = $("#inputUserName").val();
         var userEmail = decodeHTMLEntities('@Model');
-        $.post('/Login/RegisterOpenIdUser', { userName: userName, token: token, emailAddress: userEmail }, function (data) {
+        $.post(`${pathBase}/Login/RegisterOpenIdUser`, { userName: userName, token: token, emailAddress: userEmail }, function (data) {
             if (data.success) {
                 successToast(data.message);
                 setTimeout(function () { window.location.href = '/Home' }, 500);
@@ -59,9 +67,9 @@
             }
         });
     }
-    function sendOpenIdRegistrationToken(){
+    function sendOpenIdRegistrationToken() {
         var userEmail = decodeHTMLEntities('@Model');
-        $.post('/Login/SendRegistrationToken', { emailAddress: userEmail }, function (data) {
+        $.post(`${pathBase}/Login/SendRegistrationToken`, { emailAddress: userEmail }, function (data) {
             if (data.success) {
                 successToast(data.message);
             } else {

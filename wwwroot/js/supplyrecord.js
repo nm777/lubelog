@@ -75,7 +75,7 @@ function saveSupplyRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveSupplyRecordToVehicleId', { supplyRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveSupplyRecordToVehicleId`, { supplyRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Supply Record Updated" : "Supply Record Added.");
             hideAddSupplyRecordModal();

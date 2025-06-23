@@ -75,7 +75,7 @@ function saveCollisionRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveCollisionRecordToVehicleId', { collisionRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveCollisionRecordToVehicleId`, { collisionRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Repair Record Updated" : "Repair Record Added.");
             hideAddCollisionRecordModal();

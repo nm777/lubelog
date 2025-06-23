@@ -146,7 +146,7 @@ function saveVehicle(isEdit) {
     if (hasError) {
         return;
     }
-    $.post('/Vehicle/SaveVehicle', {
+    $.post(`${pathBase}/Vehicle/SaveVehicle`, {
         id: vehicleId,
         imageLocation: uploadedFile,
         year: vehicleYear,
@@ -565,7 +565,7 @@ function uploadVehicleFilesAsync(event) {
             $(event).val(""); //clear out the filename from the uploader
             if (response.length > 0) {
                 uploadedFiles.push.apply(uploadedFiles, response);
-                $.post('/Vehicle/GetFilesPendingUpload', { uploadedFiles: uploadedFiles }, function (viewData) {
+                $.post(`${pathBase}/Vehicle/GetFilesPendingUpload`, { uploadedFiles: uploadedFiles }, function (viewData) {
                     $("#filesPendingUpload").html(viewData);
                 });
             }
@@ -674,7 +674,7 @@ function printContainer(htmlData) {
 }
 function printTabStickers(ids, source) {
     var vehicleId = GetVehicleId().vehicleId;
-    $.post('/Vehicle/PrintRecordStickers', {
+    $.post(`${pathBase}/Vehicle/PrintRecordStickers`, {
         vehicleId: vehicleId,
         recordIds: ids,
         importMode: source
@@ -779,7 +779,7 @@ function moveRecords(ids, source, dest) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post('/Vehicle/MoveRecords', { recordIds: ids, source: source, destination: dest }, function (data) {
+            $.post(`${pathBase}/Vehicle/MoveRecords`, { recordIds: ids, source: source, destination: dest }, function (data) {
                 if (data) {
                     successToast(`${ids.length} Record(s) Moved`);
                     var vehicleId = GetVehicleId().vehicleId;
@@ -848,7 +848,7 @@ function deleteRecords(ids, source) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post('/Vehicle/DeleteRecords', { recordIds: ids, importMode: source }, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteRecords`, { recordIds: ids, importMode: source }, function (data) {
                 if (data) {
                     successToast(`${ids.length} Record(s) Deleted`);
                     var vehicleId = GetVehicleId().vehicleId;
@@ -921,7 +921,7 @@ function duplicateRecords(ids, source) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post('/Vehicle/DuplicateRecords', { recordIds: ids, importMode: source }, function (data) {
+            $.post(`${pathBase}/Vehicle/DuplicateRecords`, { recordIds: ids, importMode: source }, function (data) {
                 if (data) {
                     successToast(`${ids.length} Record(s) Duplicated`);
                     var vehicleId = GetVehicleId().vehicleId;
@@ -1004,7 +1004,7 @@ function duplicateRecordsToOtherVehicles(ids, source) {
                 },
             }).then(function (result) {
                 if (result.isConfirmed) {
-                    $.post('/Vehicle/DuplicateRecordsToOtherVehicles', { recordIds: ids, vehicleIds: result.value.selectedVehicleData.ids, importMode: source}, function (data) {
+                    $.post(`${pathBase}/Vehicle/DuplicateRecordsToOtherVehicles`, { recordIds: ids, vehicleIds: result.value.selectedVehicleData.ids, importMode: source}, function (data) {
                         if (data) {
                             successToast(`${ids.length} Record(s) Duplicated`);
                         } else {
@@ -1053,7 +1053,7 @@ function insertOdometer(ids, source) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post('/Vehicle/BulkCreateOdometerRecords', { recordIds: ids, importMode: source }, function (data) {
+            $.post(`${pathBase}/Vehicle/BulkCreateOdometerRecords`, { recordIds: ids, importMode: source }, function (data) {
                 if (data) {
                     successToast(`${ids.length} Odometer Record(s) Created`);
                     var vehicleId = GetVehicleId().vehicleId;
@@ -1427,7 +1427,7 @@ function saveUserColumnPreferences(importMode) {
         visibleColumns: visibleColumns,
         columnOrder: columnOrder
     };
-    $.post('/Vehicle/SaveUserColumnPreferences', { columnPreference: columnPreference }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveUserColumnPreferences`, { columnPreference: columnPreference }, function (data) {
         if (!data) {
             errorToast(genericErrorMessage());
         }

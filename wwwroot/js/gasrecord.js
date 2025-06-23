@@ -75,7 +75,7 @@ function saveGasRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveGasRecordToVehicleId', { gasRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveGasRecordToVehicleId`, { gasRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Gas Record Updated" : "Gas Record Added.");
             hideAddGasRecordModal();
@@ -164,7 +164,7 @@ function getAndValidateGasRecordValues() {
 function saveUserGasTabPreferences() {
     var gasUnit = $("[data-gas='consumption']").attr("data-unit");
     var fuelMileageUnit = $("[data-gas='fueleconomy']").attr("data-unit");
-    $.post('/Vehicle/SaveUserGasTabPreferences', { gasUnit: gasUnit, fuelMileageUnit: fuelMileageUnit }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveUserGasTabPreferences`, { gasUnit: gasUnit, fuelMileageUnit: fuelMileageUnit }, function (data) {
         if (!data) {
             errorToast("Error Saving User Preferences");
         }
@@ -362,7 +362,7 @@ function updateMPGLabels() {
 function toggleUnits(sender) {
     event.preventDefault();
     //check which column to convert.
-    sender = $(sender); 
+    sender = $(sender);
     if (sender.attr("data-gas") == "consumption") {
         switch (sender.attr("data-unit")) {
             case "US gal":
@@ -430,7 +430,7 @@ function editMultipleGasRecords(ids) {
     if (ids.length < 2) {
         return;
     }
-    $.post('/Vehicle/GetGasRecordsEditModal', { recordIds: ids }, function (data) {
+    $.post(`${pathBase}/Vehicle/GetGasRecordsEditModal`, { recordIds: ids }, function (data) {
         if (data) {
             $("#gasRecordModalContent").html(data);
             //initiate datepicker
@@ -485,7 +485,7 @@ function saveMultipleGasRecordsToVehicle() {
             extraFields: gasExtraFields.extraFields
         }
     }
-    $.post('/Vehicle/SaveMultipleGasRecords', { editModel: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveMultipleGasRecords`, { editModel: formValues }, function (data) {
         if (data) {
             successToast("Gas Records Updated");
             hideAddGasRecordModal();

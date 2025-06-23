@@ -1,7 +1,7 @@
 ﻿function showEditReminderRecordModal(reminderId) {
     $.get(`/Vehicle/GetReminderRecordForEditById?reminderRecordId=${reminderId}`, function (data) {
         if (data) {
-            $("#reminderRecordModalContent").html(data); 
+            $("#reminderRecordModalContent").html(data);
             initDatePicker($('#reminderDate'), true);
             initTagSelector($("#reminderRecordTag"));
             $("#reminderRecordModal").modal("show");
@@ -125,7 +125,7 @@ function saveReminderRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveReminderRecordToVehicleId', { reminderRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveReminderRecordToVehicleId`, { reminderRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Reminder Updated" : "Reminder Added.");
             hideAddReminderRecordModal();
@@ -205,7 +205,7 @@ function getAndValidateReminderRecordValues() {
     var hasError = false;
     var reminderDateIsInvalid = reminderDate.trim() == ''; //eliminates whitespace.
     var reminderMileageIsInvalid = reminderMileage.trim() == '' || isNaN(reminderMileage) || parseInt(reminderMileage) < 0;
-    if ((reminderOption == "Both" || reminderOption == "Date") && reminderDateIsInvalid) { 
+    if ((reminderOption == "Both" || reminderOption == "Date") && reminderDateIsInvalid) {
         hasError = true;
         $("#reminderDate").addClass("is-invalid");
     } else if (reminderOption == "Date") {
@@ -302,7 +302,7 @@ function createPlanRecordFromReminder(reminderRecordId) {
         description: formValues.description,
         notes: formValues.notes
     };
-    $.post('/Vehicle/GetAddPlanRecordPartialView', { planModel: planModelInput }, function (data) {
+    $.post(`${pathBase}/Vehicle/GetAddPlanRecordPartialView`, { planModel: planModelInput }, function (data) {
         $("#reminderRecordModal").modal("hide");
         $("#planRecordModalContent").html(data);
         $("#planRecordModal").modal("show");

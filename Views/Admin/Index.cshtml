@@ -111,7 +111,7 @@
     }
     function updateUserAdmin(userId, sender) {
         var isChecked = $(sender).is(":checked");
-        $.post('/Admin/UpdateUserAdminStatus', { userId: userId, isAdmin: isChecked }, function (data) {
+        $.post(`${pathBase}/Admin/UpdateUserAdminStatus`, { userId: userId, isAdmin: isChecked }, function (data) {
             if (data) {
                 reloadUserTable();
             } else {

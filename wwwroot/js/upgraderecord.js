@@ -75,7 +75,7 @@ function saveUpgradeRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveUpgradeRecordToVehicleId', { upgradeRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveUpgradeRecordToVehicleId`, { upgradeRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Upgrade Record Updated" : "Upgrade Record Added.");
             hideAddUpgradeRecordModal();

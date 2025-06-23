@@ -65,7 +65,7 @@
             type: 'POST',
             success: function (response) {
                 if (response.trim() != '') {
-                    $.post('/Migration/Import', { fileName: response }, function (data) {
+                    $.post(`${pathBase}/Migration/Import`, { fileName: response }, function (data) {
                         sloader.hide();
                         if (data.success) {
                             successToast(data.message);

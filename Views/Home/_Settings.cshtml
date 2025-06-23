@@ -247,7 +247,7 @@
                                     <li><a class="dropdown-item" href="#" onclick="showTranslationDownloader()">@translator.Translate(userLanguage, "Get Translations")</a></li>
                                 </ul>
                             </div>
-                            
+
                         </div>
                         <div class="col-6 d-grid">
                             <button onclick="deleteLanguage()" @(Model.UserConfig.UserLanguage == "en_US" ? "disabled" : "") class="btn btn-danger btn-md text-truncate"><i class="bi bi-trash"></i><span class="ms-2 d-sm-inline d-md-none d-xl-inline">@translator.Translate(userLanguage, "Delete")</span></button>
@@ -444,7 +444,7 @@
             },
         }).then(function (result) {
             if (result.isConfirmed) {
-                $.post('/Home/SaveReminderUrgencyThreshold', { urgentDays: result.value.urgentDays, veryUrgentDays: result.value.veryUrgentDays, urgentDistance: result.value.urgentDistance, veryUrgentDistance: result.value.veryUrgentDistance }, function (data) {
+                $.post(`${pathBase}/Home/SaveReminderUrgencyThreshold`, { urgentDays: result.value.urgentDays, veryUrgentDays: result.value.veryUrgentDays, urgentDistance: result.value.urgentDistance, veryUrgentDistance: result.value.veryUrgentDistance }, function (data) {
                     if (data) {
                         setTimeout(function () { window.location.href = '/Home/Index?tab=settings' }, 500);
                     } else {
@@ -476,7 +476,7 @@
                 },
             }).then(function (result) {
                 if (result.isConfirmed) {
-                    $.post('/Login/CreateLoginCreds', { userName: result.value.username, password: result.value.password }, function (data) {
+                    $.post(`${pathBase}/Login/CreateLoginCreds`, { userName: result.value.username, password: result.value.password }, function (data) {
                         if (data) {
                             setTimeout(function () { window.location.href = '/Login' }, 500);
                         } else {
@@ -486,7 +486,7 @@
                 }
             });
         } else {
-            $.post('/Login/DestroyLoginCreds', function (data) {
+            $.post(`${pathBase}/Login/DestroyLoginCreds`, function (data) {
                 if (data) {
                     setTimeout(function () { window.location.href = '/Home' }, 1000);
                 } else {

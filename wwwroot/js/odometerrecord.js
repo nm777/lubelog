@@ -75,7 +75,7 @@ function saveOdometerRecordToVehicle(isEdit) {
         return;
     }
     //save to db.
-    $.post('/Vehicle/SaveOdometerRecordToVehicleId', { odometerRecord: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveOdometerRecordToVehicleId`, { odometerRecord: formValues }, function (data) {
         if (data) {
             successToast(isEdit ? "Odometer Record Updated" : "Odometer Record Added.");
             hideAddOdometerRecordModal();
@@ -155,7 +155,7 @@ function editMultipleOdometerRecords(ids) {
     if (ids.length < 2) {
         return;
     }
-    $.post('/Vehicle/GetOdometerRecordsEditModal', { recordIds: ids }, function (data) {
+    $.post(`${pathBase}/Vehicle/GetOdometerRecordsEditModal`, { recordIds: ids }, function (data) {
         if (data) {
             $("#odometerRecordModalContent").html(data);
             //initiate datepicker
@@ -203,7 +203,7 @@ function saveMultipleOdometerRecordsToVehicle() {
             extraFields: odometerExtraFields.extraFields
         }
     }
-    $.post('/Vehicle/SaveMultipleOdometerRecords', { editModel: formValues }, function (data) {
+    $.post(`${pathBase}/Vehicle/SaveMultipleOdometerRecords`, { editModel: formValues }, function (data) {
         if (data) {
             successToast("Odometer Records Updated");
             hideAddOdometerRecordModal();
@@ -220,7 +220,7 @@ function toggleInitialOdometerEnabled() {
     } else {
         $("#initialOdometerRecordMileage").prop("disabled", true);
     }
-    
+
 }
 function showTripModal() {
     $(".odometer-modal").addClass('d-none');
@@ -350,7 +350,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     var sinOne = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
     var tanOne = 2 * Math.atan2(Math.sqrt(sinOne), Math.sqrt(1 - sinOne));
-    var calculatedDistance = earthRadius * tanOne; 
+    var calculatedDistance = earthRadius * tanOne;
     if (getGlobalConfig().useMPG) {
         calculatedDistance *= 0.621; //convert to mile if needed.
     }
@@ -367,9 +367,9 @@ function saveRecordedOdometer() {
         //update current odometer value
         $("#odometerRecordMileage").val(parseInt(getRecordedOdometer()).toString());
         //generate attachment
-        $.post('/Files/UploadCoordinates', { coordinates: tripCoordinates }, function (response) {
+        $.post(`${pathBase}/Files/UploadCoordinates`, { coordinates: tripCoordinates }, function (response) {
             uploadedFiles.push(response);
-            $.post('/Vehicle/GetFilesPendingUpload', { uploadedFiles: uploadedFiles }, function (viewData) {
+            $.post(`${pathBase}/Vehicle/GetFilesPendingUpload`, { uploadedFiles: uploadedFiles }, function (viewData) {
                 $("#filesPendingUpload").html(viewData);
                 tripCoordinates = ["Latitude,Longitude"];
             });

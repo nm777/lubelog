@@ -2,7 +2,7 @@
     var userName = $("#inputUserName").val();
     var userPassword = $("#inputUserPassword").val();
     var isPersistent = $("#inputPersistent").is(":checked");
-    $.post('/Login/Login', {userName: userName, password: userPassword, isPersistent: isPersistent}, function (data) {
+    $.post(`${pathBase}/Login/Login`, {userName: userName, password: userPassword, isPersistent: isPersistent}, function (data) {
         if (data) {
             //check for redirectURL
             var redirectURL = getRedirectURL().url;
@@ -21,7 +21,7 @@ function performRegistration() {
     var userName = $("#inputUserName").val();
     var userPassword = $("#inputUserPassword").val();
     var userEmail = $("#inputEmail").val();
-    $.post('/Login/Register', { userName: userName, password: userPassword, token: token, emailAddress: userEmail }, function (data) {
+    $.post(`${pathBase}/Login/Register`, { userName: userName, password: userPassword, token: token, emailAddress: userEmail }, function (data) {
         if (data.success) {
             successToast(data.message);
             setTimeout(function () { window.location.href = '/Login/Index' }, 500);
@@ -32,7 +32,7 @@ function performRegistration() {
 }
 function requestPasswordReset() {
     var userName = $("#inputUserName").val();
-    $.post('/Login/RequestResetPassword', { userName: userName }, function (data) {
+    $.post(`${pathBase}/Login/RequestResetPassword`, { userName: userName }, function (data) {
         if (data.success) {
             successToast(data.message);
             setTimeout(function () { window.location.href = '/Login/Index' }, 500);
@@ -45,7 +45,7 @@ function performPasswordReset() {
     var token = $("#inputToken").val();
     var userPassword = $("#inputUserPassword").val();
     var userEmail = $("#inputEmail").val();
-    $.post('/Login/PerformPasswordReset', { password: userPassword, token: token, emailAddress: userEmail }, function (data) {
+    $.post(`${pathBase}/Login/PerformPasswordReset`, { password: userPassword, token: token, emailAddress: userEmail }, function (data) {
         if (data.success) {
             successToast(data.message);
             setTimeout(function () { window.location.href = '/Login/Index' }, 500);
@@ -79,7 +79,7 @@ function sendRegistrationToken() {
         },
     }).then(function (result) {
         if (result.isConfirmed) {
-            $.post('/Login/SendRegistrationToken', { emailAddress: result.value.tokenEmail }, function (data) {
+            $.post(`${pathBase}/Login/SendRegistrationToken`, { emailAddress: result.value.tokenEmail }, function (data) {
                 if (data.success) {
                     successToast(data.message);
                 } else {
