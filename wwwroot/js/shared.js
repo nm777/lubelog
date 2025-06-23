@@ -111,7 +111,7 @@ function saveVehicle(isEdit) {
             $(".modal.fade.show").find(`.extra-field [placeholder='${vehicleIdentifier}']`).removeClass("is-invalid");
         }
     }
-    
+
     if (vehicleHasOdometerAdjustment) {
         //validate odometer adjustments
         //validate multiplier
@@ -242,7 +242,7 @@ function hermiteResize(origImg, width, height) {
     var ratio_w_half = Math.ceil(ratio_w / 2);
     var ratio_h_half = Math.ceil(ratio_h / 2);
 
-   
+
     var img = ctx.getImageData(0, 0, width_source, height_source);
     var img2 = ctx.createImageData(width, height);
     var data = img.data;
@@ -686,7 +686,7 @@ function printTabStickers(ids, source) {
 }
 function exportVehicleData(mode) {
     var vehicleId = GetVehicleId().vehicleId;
-    $.get('/Vehicle/ExportFromVehicleToCsv', { vehicleId: vehicleId, mode: mode }, function (data) {
+    $.get(`${pathBase}/Vehicle/ExportFromVehicleToCsv`, { vehicleId: vehicleId, mode: mode }, function (data) {
         if (!data) {
             errorToast(genericErrorMessage());
         } else {

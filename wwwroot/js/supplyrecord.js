@@ -1,5 +1,5 @@
 ﻿function showAddSupplyRecordModal() {
-    $.get('/Vehicle/GetAddSupplyRecordPartialView', function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddSupplyRecordPartialView`, function (data) {
         if (data) {
             $("#supplyRecordModalContent").html(data);
             //initiate datepicker

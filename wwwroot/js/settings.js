@@ -123,7 +123,7 @@ function sendTestEmail() {
     });
 }
 function makeBackup() {
-    $.get('/Files/MakeBackup', function (data) {
+    $.get(`${pathBase}/Files/MakeBackup`, function (data) {
         window.location.href = data;
     });
 }
@@ -202,7 +202,7 @@ function handleDefaultReminderInputKeyDown() {
 }
 
 function loadSponsors() {
-    $.get('/Home/Sponsors', function (data) {
+    $.get(`${pathBase}/Home/Sponsors`, function (data) {
         $("#sponsorsContainer").html(data);
     })
 }
@@ -278,7 +278,7 @@ function exportTranslation(){
     });
 }
 function showTranslationDownloader() {
-    $.get('/Home/GetAvailableTranslations', function(data){
+    $.get(`${pathBase}/Home/GetAvailableTranslations`, function(data){
         $('#translationDownloadModalContent').html(data);
         $('#translationDownloadModal').modal('show');
     })
@@ -300,7 +300,7 @@ function downloadTranslation(continent, name) {
 }
 function downloadAllTranslations() {
     sloader.show();
-    $.get('/Home/DownloadAllTranslations', function (data) {
+    $.get(`${pathBase}/Home/DownloadAllTranslations`, function (data) {
         sloader.hide();
         if (data.success) {
             successToast(data.message);
@@ -443,7 +443,7 @@ function showCustomWidgets() {
         },
     }).then(function (result) {
         if (result.isConfirmed) {
-            $.get('/Home/GetCustomWidgetEditor', function (data) {
+            $.get(`${pathBase}/Home/GetCustomWidgetEditor`, function (data) {
                 if (data.trim() != '') {
                     $("#customWidgetModalContent").html(data);
                     $("#customWidgetModal").modal('show');

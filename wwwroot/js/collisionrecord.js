@@ -1,5 +1,5 @@
 ﻿function showAddCollisionRecordModal() {
-    $.get('/Vehicle/GetAddCollisionRecordPartialView', function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddCollisionRecordPartialView`, function (data) {
         if (data) {
             $("#collisionRecordModalContent").html(data);
             //initiate datepicker

@@ -100,12 +100,12 @@
         $("#tokenModal").modal('hide');
     }
     function reloadTokenTable() {
-        $.get('/Admin/GetTokenPartialView', function (data) {
+        $.get(`${pathBase}/Admin/GetTokenPartialView`, function (data) {
             $("#tokenTable").html(data);
         });
     }
     function reloadUserTable() {
-        $.get('/Admin/GetUserPartialView', function (data) {
+        $.get(`${pathBase}/Admin/GetUserPartialView`, function (data) {
             $("#userTable").html(data);
         });
     }
@@ -172,7 +172,7 @@
         }).then(function (result) {
             if (result.isConfirmed) {
                 var autoNotify = $("#enableAutoNotify").is(":checked");
-                $.get('/Admin/GenerateNewToken', { emailAddress: result.value.emailAddress, autoNotify: autoNotify }, function (data) {
+                $.get(`${pathBase}/Admin/GenerateNewToken`, { emailAddress: result.value.emailAddress, autoNotify: autoNotify }, function (data) {
                     if (data.success) {
                         reloadTokenTable();
                     } else {

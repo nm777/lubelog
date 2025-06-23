@@ -1,5 +1,5 @@
 ﻿function showAddNoteModal() {
-    $.get('/Vehicle/GetAddNotePartialView', function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddNotePartialView`, function (data) {
         if (data) {
             $("#noteModalContent").html(data);
             initTagSelector($("#noteRecordTag"));

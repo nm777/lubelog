@@ -1,5 +1,5 @@
 ﻿function showAddTaxRecordModal() {
-    $.get('/Vehicle/GetAddTaxRecordPartialView', function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddTaxRecordPartialView`, function (data) {
         if (data) {
             $("#taxRecordModalContent").html(data);
             //initiate datepicker

@@ -1,5 +1,5 @@
 ﻿function showAddPlanRecordModal() {
-    $.get('/Vehicle/GetAddPlanRecordPartialView', function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddPlanRecordPartialView`, function (data) {
         if (data) {
             $("#planRecordModalContent").html(data);
             //initiate datepicker

@@ -1,5 +1,5 @@
 ﻿function showAddUpgradeRecordModal() {
-    $.get('/Vehicle/GetAddUpgradeRecordPartialView', function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddUpgradeRecordPartialView`, function (data) {
         if (data) {
             $("#upgradeRecordModalContent").html(data);
             //initiate datepicker

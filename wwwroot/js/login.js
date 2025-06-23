@@ -56,7 +56,7 @@ function performPasswordReset() {
 }
 
 function remoteLogin() {
-    $.get('/Login/GetRemoteLoginLink', function (data) {
+    $.get(`${pathBase}/Login/GetRemoteLoginLink`, function (data) {
         if (data) {
             window.location.href = data;
         }

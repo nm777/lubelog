@@ -1,6 +1,6 @@
 ﻿function showAddVehicleModal() {
     uploadedFile = "";
-    $.get('/Vehicle/AddVehiclePartialView', function (data) {
+    $.get(`${pathBase}/Vehicle/AddVehiclePartialView`, function (data) {
         if (data) {
             $("#addVehicleModalContent").html(data);
             initTagSelector($("#inputTag"));
@@ -22,7 +22,7 @@ function loadGarage() {
     });
 }
 function loadSettings() {
-    $.get('/Home/Settings', function (data) {
+    $.get(`${pathBase}/Home/Settings`, function (data) {
         $("#settings-tab-pane").html(data);
     });
 }
@@ -58,7 +58,7 @@ function bindTabEvent() {
     });
 }
 function getVehicleCalendarEvents() {
-    $.get('/Home/Calendar', function (data) {
+    $.get(`${pathBase}/Home/Calendar`, function (data) {
         if (data) {
             $("#calendar-tab-pane").html(data);
         }
@@ -346,14 +346,14 @@ function copyContributors(sourceVehicleId, destVehicleId) {
 }
 
 function showAccountInformationModal() {
-    $.get('/Home/GetUserAccountInformationModal', function (data) {
+    $.get(`${pathBase}/Home/GetUserAccountInformationModal`, function (data) {
         $('#accountInformationModalContent').html(data);
         $('#accountInformationModal').modal('show');
     })
 }
 
 function showRootAccountInformationModal() {
-    $.get('/Home/GetRootAccountInformationModal', function (data) {
+    $.get(`${pathBase}/Home/GetRootAccountInformationModal`, function (data) {
         $('#accountInformationModalContent').html(data);
         $('#accountInformationModal').modal('show');
     })

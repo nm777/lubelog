@@ -458,7 +458,7 @@ function loadGlobalSearchResult(recordId, recordType) {
     }
 }
 function loadCustomWidgets() {
-    $.get('/Vehicle/GetAdditionalWidgets', function (data) {
+    $.get(`${pathBase}/Vehicle/GetAdditionalWidgets`, function (data) {
         $("#vehicleCustomWidgetsModalContent").html(data);
         $("#vehicleCustomWidgetsModal").modal('show');
     })

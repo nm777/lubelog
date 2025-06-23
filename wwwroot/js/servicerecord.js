@@ -1,5 +1,5 @@
 ﻿function showAddServiceRecordModal() {
-    $.get('/Vehicle/GetAddServiceRecordPartialView', function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddServiceRecordPartialView`, function (data) {
         if (data) {
             $("#serviceRecordModalContent").html(data);
             //initiate datepicker
