@@ -138,7 +138,7 @@ function uploadLanguage(event) {
     formData.append("file", event.files[0]);
     sloader.show();
     $.ajax({
-        url: "/Files/HandleTranslationFileUpload",
+        url: `${pathBase}/Files/HandleTranslationFileUpload`,
         data: formData,
         cache: false,
         processData: false,
@@ -164,7 +164,7 @@ function restoreBackup(event) {
     console.log('LubeLogger - DB Restoration Started');
     sloader.show();
     $.ajax({
-        url: "/Files/HandleFileUpload",
+        url: `${pathBase}/Files/HandleFileUpload`,
         data: formData,
         cache: false,
         processData: false,

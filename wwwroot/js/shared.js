@@ -313,7 +313,7 @@ function uploadFileAsync(event) {
     }
     sloader.show();
     $.ajax({
-        url: "/Files/HandleFileUpload",
+        url: `${pathBase}/Files/HandleFileUpload`,
         data: formData,
         cache: false,
         processData: false,
@@ -554,7 +554,7 @@ function uploadVehicleFilesAsync(event) {
     }
     sloader.show();
     $.ajax({
-        url: "/Files/HandleMultipleFileUpload",
+        url: `${pathBase}/Files/HandleMultipleFileUpload`,
         data: formData,
         cache: false,
         processData: false,

@@ -58,7 +58,7 @@
         formData.append("file", event.files[0]);
         sloader.show();
         $.ajax({
-            url: "/Files/HandleFileUpload",
+            url: `${pathBase}/Files/HandleFileUpload`,
             data: formData,
             cache: false,
             processData: false,
