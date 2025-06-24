@@ -9,7 +9,7 @@
             if (redirectURL.trim() != "") {
                 window.location.href = redirectURL;
             } else {
-                window.location.href = '/Home';
+                window.location.href = `${pathBase}/Home`;
             }
         } else {
             errorToast("Invalid Login Credentials, please try again.");

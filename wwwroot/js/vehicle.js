@@ -1,5 +1,5 @@
 ﻿function returnToGarage() {
-    window.location.href = '/Home';
+    window.location.href = `${pathBase}/Home`;
 }
 $(document).ready(function () {
     var vehicleId = GetVehicleId().vehicleId;
@@ -239,7 +239,7 @@ function deleteVehicle(vehicleId) {
         if (result.isConfirmed) {
             $.post(`${pathBase}/Vehicle/DeleteVehicle`, { vehicleId: vehicleId }, function (data) {
                 if (data) {
-                    window.location.href = '/Home';
+                    window.location.href = `${pathBase}/Home`;
                 }
             })
         }

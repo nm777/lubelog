@@ -89,7 +89,7 @@ function updateSettings() {
     $.post(`${pathBase}/Home/WriteToSettings`, { userConfig: userConfigObject }, function (data) {
         sloader.hide();
         if (data) {
-            setTimeout(function () { window.location.href = '/Home/Index?tab=settings' }, 500);
+            setTimeout(function () { window.location.href = `${pathBase}/Home/Index?tab=settings` }, 500);
         } else {
             errorToast(genericErrorMessage());
         }
@@ -147,7 +147,7 @@ function uploadLanguage(event) {
         success: function (response) {
             sloader.hide();
             if (response.success) {
-                setTimeout(function () { window.location.href = '/Home/Index?tab=settings' }, 500);
+                setTimeout(function () { window.location.href = `${pathBase}/Home/Index?tab=settings` }, 500);
             } else {
                 errorToast(response.message);
             }
@@ -177,7 +177,7 @@ function restoreBackup(event) {
                     if (data) {
                         console.log('LubeLogger - DB Restoration Completed');
                         successToast("Backup Restored");
-                        setTimeout(function () { window.location.href = '/Home/Index' }, 500);
+                        setTimeout(function () { window.location.href = `${pathBase}/Home/Index` }, 500);
                     } else {
                         errorToast(genericErrorMessage());
                         console.log('LubeLogger - DB Restoration Failed - Failed to process backup file.');
