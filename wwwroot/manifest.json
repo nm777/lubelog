@@ -1,7 +1,6 @@
 {
   "name": "LubeLogger",
   "start_url": "/",
-  "scope": ".",
   "display": "standalone",
   "icons": [
     {
