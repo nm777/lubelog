@@ -24,7 +24,7 @@ function performRegistration() {
     $.post(`${pathBase}/Login/Register`, { userName: userName, password: userPassword, token: token, emailAddress: userEmail }, function (data) {
         if (data.success) {
             successToast(data.message);
-            setTimeout(function () { window.location.href = '/Login/Index' }, 500);
+            setTimeout(function () { window.location.href = `${pathBase}/Login/Index` }, 500);
         } else {
             errorToast(data.message);
         }
@@ -35,7 +35,7 @@ function requestPasswordReset() {
     $.post(`${pathBase}/Login/RequestResetPassword`, { userName: userName }, function (data) {
         if (data.success) {
             successToast(data.message);
-            setTimeout(function () { window.location.href = '/Login/Index' }, 500);
+            setTimeout(function () { window.location.href = `${pathBase}/Login/Index` }, 500);
         } else {
             errorToast(data.message);
         }
@@ -48,7 +48,7 @@ function performPasswordReset() {
     $.post(`${pathBase}/Login/PerformPasswordReset`, { password: userPassword, token: token, emailAddress: userEmail }, function (data) {
         if (data.success) {
             successToast(data.message);
-            setTimeout(function () { window.location.href = '/Login/Index' }, 500);
+            setTimeout(function () { window.location.href = `${pathBase}/Login/Index` }, 500);
         } else {
             errorToast(data.message);
         }

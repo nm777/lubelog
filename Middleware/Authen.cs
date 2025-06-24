@@ -16,6 +16,7 @@ namespace CarCareTracker.Middleware
         private IDataProtector _dataProtector;
         private ILoginLogic _loginLogic;
         private bool enableAuth;
+        private string _pathBase;
         public Authen(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             UrlEncoder encoder,
@@ -29,6 +30,7 @@ namespace CarCareTracker.Middleware
             _dataProtector = securityProvider.CreateProtector("login");
             _loginLogic = loginLogic;
             enableAuth = bool.Parse(configuration["EnableAuth"] ?? "false");
+            _pathBase = configuration["PathBase"] ?? "";
         }
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
@@ -162,10 +164,10 @@ namespace CarCareTracker.Middleware
             }
             if (Request.Path.Value == "/Vehicle/Index" && Request.QueryString.HasValue)
             {
-                Response.Redirect($"/Login/Index?redirectURL={Request.Path.Value}{Request.QueryString.Value}");
+                Response.Redirect($"{_pathBase}/Login/Index?redirectURL={Request.Path.Value}{Request.QueryString.Value}");
             } else
             {
-                Response.Redirect("/Login/Index");
+                Response.Redirect($"{_pathBase}/Login/Index");
             }
             return Task.CompletedTask;
         }
