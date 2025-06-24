@@ -22,7 +22,7 @@ function showEditPlanRecordModal(planRecordId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetPlanRecordForEditById?planRecordId=${planRecordId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetPlanRecordForEditById?planRecordId=${planRecordId}`, function (data) {
         if (data) {
             $("#planRecordModalContent").html(data);
             //initiate datepicker
@@ -52,7 +52,7 @@ function showEditPlanRecordTemplateModal(planRecordTemplateId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetPlanRecordTemplateForEditById?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetPlanRecordTemplateForEditById?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
         if (data) {
             $("#planRecordModalContent").html(data);
             //initiate datepicker
@@ -87,7 +87,7 @@ function deletePlanRecord(planRecordId, noModal) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeletePlanRecordById?planRecordId=${planRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeletePlanRecordById?planRecordId=${planRecordId}`, function (data) {
                 if (data) {
                     if (!noModal) {
                         hideAddPlanRecordModal();
@@ -131,7 +131,7 @@ function savePlanRecordToVehicle(isEdit) {
 }
 function showPlanRecordTemplatesModal() {
     var vehicleId = GetVehicleId().vehicleId;
-    $.get(`/Vehicle/GetPlanRecordTemplatesForVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetPlanRecordTemplatesForVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#planRecordTemplateModalContent").html(data);
             $('#planRecordTemplateModal').modal('show');
@@ -142,7 +142,7 @@ function hidePlanRecordTemplatesModal() {
     $('#planRecordTemplateModal').modal('hide');
 }
 function usePlannerRecordTemplate(planRecordTemplateId) {
-    $.post(`/Vehicle/ConvertPlanRecordTemplateToPlanRecord?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
+    $.post(`${pathBase}/Vehicle/ConvertPlanRecordTemplateToPlanRecord?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
         if (data.success) {
             var vehicleId = GetVehicleId().vehicleId;
             successToast(data.message);
@@ -168,7 +168,7 @@ function deletePlannerRecordTemplate(planRecordTemplateId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeletePlanRecordTemplateById?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeletePlanRecordTemplateById?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
                 $("#workAroundInput").hide();
                 if (data) {
                     successToast("Plan Template Deleted");
@@ -338,7 +338,7 @@ function orderPlanSupplies(planRecordTemplateId, closeSwal) {
     if (closeSwal) {
         Swal.close();
     }
-    $.get(`/Vehicle/OrderPlanSupplies?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/OrderPlanSupplies?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
         if (data.success != undefined && !data.success) {
             //success is provided.
             errorToast(data.message);

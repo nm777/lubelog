@@ -20,7 +20,7 @@ function showEditNoteModal(noteId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetNoteForEditById?noteId=${noteId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetNoteForEditById?noteId=${noteId}`, function (data) {
         if (data) {
             $("#noteModalContent").html(data);
             initTagSelector($("#noteRecordTag"));
@@ -47,7 +47,7 @@ function deleteNote(noteId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteNoteById?noteId=${noteId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteNoteById?noteId=${noteId}`, function (data) {
                 if (data) {
                     hideAddNoteModal();
                     successToast("Note Deleted");

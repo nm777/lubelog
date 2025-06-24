@@ -22,7 +22,7 @@ function showEditCollisionRecordModal(collisionRecordId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetCollisionRecordForEditById?collisionRecordId=${collisionRecordId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetCollisionRecordForEditById?collisionRecordId=${collisionRecordId}`, function (data) {
         if (data) {
             $("#collisionRecordModalContent").html(data);
             //initiate datepicker
@@ -51,7 +51,7 @@ function deleteCollisionRecord(collisionRecordId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteCollisionRecordById?collisionRecordId=${collisionRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteCollisionRecordById?collisionRecordId=${collisionRecordId}`, function (data) {
                 if (data) {
                     hideAddCollisionRecordModal();
                     successToast("Repair Record Deleted");

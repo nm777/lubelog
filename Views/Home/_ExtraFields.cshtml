@@ -122,7 +122,7 @@
     }
     function refreshExtraFieldModal() {
         var selectedExtraFieldTab = $("#extraFieldTab").val();
-        $.post(`/Home/GetExtraFieldsModal?importMode=${selectedExtraFieldTab}`, function (data) {
+        $.post(`${pathBase}/Home/GetExtraFieldsModal?importMode=${selectedExtraFieldTab}`, function (data) {
             if (data) {
                 $("#extraFieldModalContent").html(data);
             } else {

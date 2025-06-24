@@ -8,13 +8,15 @@
 @model SupplyStore
 <div class="row">
     <div class="col-12">
-        <a onclick="showSuppliesModal()" class="btn btn-link">@translator.Translate(userLanguage,Model.AdditionalSupplies ? "Choose Additional Supplies" : "Choose Supplies")</a>
+        <a onclick="showSuppliesModal()"
+            class="btn btn-link">@translator.Translate(userLanguage,Model.AdditionalSupplies ?
+                        "Choose Additional Supplies" : "Choose Supplies")</a>
     </div>
 </div>
 <script>
     resetSuppliesModal();
     function GetCaller() {
-        return { 
+        return {
             tab: '@Model.Tab',
             addToSum: @Model.AdditionalSupplies.ToString().ToLower()
         };
@@ -22,11 +24,11 @@
     function resetSuppliesModal() {
         $("#inputSuppliesModalContent").html("");
     }
-    function setCostInputWithSupplySum(selectedSum, input){
+    function setCostInputWithSupplySum(selectedSum, input) {
         var addToSum = GetCaller().addToSum;
-        if (addToSum){
+        if (addToSum) {
             //sum of all requisitioned supplies
-            var currentSum = supplyUsageHistory.length > 0 ? supplyUsageHistory.map(x => globalParseFloat(x.cost)).reduce((a,b) => a + b) : 0;
+            var currentSum = supplyUsageHistory.length > 0 ? supplyUsageHistory.map(x => globalParseFloat(x.cost)).reduce((a, b) => a + b) : 0;
             selectedSum = globalParseFloat(selectedSum);
             var newSum = currentSum + selectedSum;
             input.val(globalFloatToString(newSum.toFixed(2)));
@@ -56,7 +58,7 @@
         copySuppliesAttachments = $("#inputCopySuppliesAttachments").is(':checked');
         hideSuppliesModal();
     }
-    function hideParentModal(){
+    function hideParentModal() {
         var caller = GetCaller().tab;
         switch (caller) {
             case "ServiceRecord":
@@ -104,7 +106,7 @@
         var caller = GetCaller().tab;
         if (caller == 'PlanRecordTemplate') {
             var planRecordTemplateId = getPlanRecordModelData().id;
-            $.get(`/Vehicle/GetSupplyRecordsForPlanRecordTemplate?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
+            $.get(`${pathBase}/Vehicle/GetSupplyRecordsForPlanRecordTemplate?planRecordTemplateId=${planRecordTemplateId}`, function (data) {
                 if (data) {
                     hideParentModal();
                     $("#inputSuppliesModalContent").html(data);
@@ -117,7 +119,7 @@
             });
         } else {
             var vehicleId = GetVehicleId().vehicleId;
-            $.get(`/Vehicle/GetSupplyRecordsForRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+            $.get(`${pathBase}/Vehicle/GetSupplyRecordsForRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
                 if (data) {
                     hideParentModal();
                     $("#inputSuppliesModalContent").html(data);

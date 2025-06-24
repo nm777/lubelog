@@ -1,5 +1,5 @@
 ﻿function showEditReminderRecordModal(reminderId) {
-    $.get(`/Vehicle/GetReminderRecordForEditById?reminderRecordId=${reminderId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetReminderRecordForEditById?reminderRecordId=${reminderId}`, function (data) {
         if (data) {
             $("#reminderRecordModalContent").html(data);
             initDatePicker($('#reminderDate'), true);
@@ -93,7 +93,7 @@ function deleteReminderRecord(reminderRecordId, e) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteReminderRecordById?reminderRecordId=${reminderRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteReminderRecordById?reminderRecordId=${reminderRecordId}`, function (data) {
                 if (data) {
                     hideAddReminderRecordModal();
                     successToast("Reminder Deleted");
@@ -174,7 +174,7 @@ function enableRecurring() {
 function markDoneReminderRecord(reminderRecordId, e) {
     event.stopPropagation();
     var vehicleId = GetVehicleId().vehicleId;
-    $.post(`/Vehicle/PushbackRecurringReminderRecord?reminderRecordId=${reminderRecordId}`, function (data) {
+    $.post(`${pathBase}/Vehicle/PushbackRecurringReminderRecord?reminderRecordId=${reminderRecordId}`, function (data) {
         if (data) {
             successToast("Reminder Updated");
             getVehicleReminders(vehicleId);

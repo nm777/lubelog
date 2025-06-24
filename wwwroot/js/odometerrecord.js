@@ -1,5 +1,5 @@
 ﻿function showAddOdometerRecordModal() {
-    $.get(`/Vehicle/GetAddOdometerRecordPartialView?vehicleId=${GetVehicleId().vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddOdometerRecordPartialView?vehicleId=${GetVehicleId().vehicleId}`, function (data) {
         if (data) {
             $("#odometerRecordModalContent").html(data);
             //initiate datepicker
@@ -22,7 +22,7 @@ function showEditOdometerRecordModal(odometerRecordId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetOdometerRecordForEditById?odometerRecordId=${odometerRecordId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetOdometerRecordForEditById?odometerRecordId=${odometerRecordId}`, function (data) {
         if (data) {
             $("#odometerRecordModalContent").html(data);
             //initiate datepicker
@@ -51,7 +51,7 @@ function deleteOdometerRecord(odometerRecordId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteOdometerRecordById?odometerRecordId=${odometerRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteOdometerRecordById?odometerRecordId=${odometerRecordId}`, function (data) {
                 if (data) {
                     hideAddOdometerRecordModal();
                     successToast("Odometer Record Deleted");
@@ -141,7 +141,7 @@ function recalculateDistance() {
     //force distance recalculation
     //reserved for when data is incoherent with negative distances due to non-chronological order of odometer records.
     var vehicleId = GetVehicleId().vehicleId
-    $.post(`/Vehicle/ForceRecalculateDistanceByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.post(`${pathBase}/Vehicle/ForceRecalculateDistanceByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             successToast("Odometer Records Updated")
             getVehicleOdometerRecords(vehicleId);

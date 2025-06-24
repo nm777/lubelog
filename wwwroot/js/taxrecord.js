@@ -22,7 +22,7 @@ function showEditTaxRecordModal(taxRecordId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetTaxRecordForEditById?taxRecordId=${taxRecordId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetTaxRecordForEditById?taxRecordId=${taxRecordId}`, function (data) {
         if (data) {
             $("#taxRecordModalContent").html(data);
             //initiate datepicker
@@ -59,7 +59,7 @@ function deleteTaxRecord(taxRecordId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteTaxRecordById?taxRecordId=${taxRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteTaxRecordById?taxRecordId=${taxRecordId}`, function (data) {
                 if (data) {
                     hideAddTaxRecordModal();
                     successToast("Tax Record Deleted");

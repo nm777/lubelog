@@ -695,7 +695,7 @@ function exportVehicleData(mode) {
     });
 }
 function showBulkImportModal(mode) {
-    $.get(`/Vehicle/GetBulkImportModalPartialView?mode=${mode}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetBulkImportModalPartialView?mode=${mode}`, function (data) {
         if (data) {
             $("#bulkImportModalContent").html(data);
             $("#bulkImportModal").modal('show');
@@ -986,7 +986,7 @@ function duplicateRecordsToOtherVehicles(ids, source) {
             break;
     }
 
-    $.get(`/Home/GetVehicleSelector?vehicleId=${GetVehicleId().vehicleId}`, function (data) {
+    $.get(`${pathBase}/Home/GetVehicleSelector?vehicleId=${GetVehicleId().vehicleId}`, function (data) {
         if (data) {
             //prompt user to select a vehicle
             Swal.fire({

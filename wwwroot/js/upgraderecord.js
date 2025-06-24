@@ -22,7 +22,7 @@ function showEditUpgradeRecordModal(upgradeRecordId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetUpgradeRecordForEditById?upgradeRecordId=${upgradeRecordId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetUpgradeRecordForEditById?upgradeRecordId=${upgradeRecordId}`, function (data) {
         if (data) {
             $("#upgradeRecordModalContent").html(data);
             //initiate datepicker
@@ -51,7 +51,7 @@ function deleteUpgradeRecord(upgradeRecordId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteUpgradeRecordById?upgradeRecordId=${upgradeRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteUpgradeRecordById?upgradeRecordId=${upgradeRecordId}`, function (data) {
                 if (data) {
                     hideAddUpgradeRecordModal();
                     successToast("Upgrade Record Deleted");

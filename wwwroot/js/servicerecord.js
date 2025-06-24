@@ -22,7 +22,7 @@ function showEditServiceRecordModal(serviceRecordId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetServiceRecordForEditById?serviceRecordId=${serviceRecordId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetServiceRecordForEditById?serviceRecordId=${serviceRecordId}`, function (data) {
         if (data) {
             $("#serviceRecordModalContent").html(data);
             //initiate datepicker
@@ -51,7 +51,7 @@ function deleteServiceRecord(serviceRecordId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteServiceRecordById?serviceRecordId=${serviceRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteServiceRecordById?serviceRecordId=${serviceRecordId}`, function (data) {
                 if (data) {
                     hideAddServiceRecordModal();
                     successToast("Service Record Deleted");

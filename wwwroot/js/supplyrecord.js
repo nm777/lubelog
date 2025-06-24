@@ -22,7 +22,7 @@ function showEditSupplyRecordModal(supplyRecordId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetSupplyRecordForEditById?supplyRecordId=${supplyRecordId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetSupplyRecordForEditById?supplyRecordId=${supplyRecordId}`, function (data) {
         if (data) {
             $("#supplyRecordModalContent").html(data);
             //initiate datepicker
@@ -51,7 +51,7 @@ function deleteSupplyRecord(supplyRecordId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteSupplyRecordById?supplyRecordId=${supplyRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteSupplyRecordById?supplyRecordId=${supplyRecordId}`, function (data) {
                 if (data) {
                     hideAddSupplyRecordModal();
                     successToast("Supply Record Deleted");

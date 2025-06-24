@@ -119,7 +119,7 @@ $(document).ready(function () {
 });
 
 function getVehicleNotes(vehicleId) {
-    $.get(`/Vehicle/GetNotesByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetNotesByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#notes-tab-pane").html(data);
             restoreScrollPosition();
@@ -127,7 +127,7 @@ function getVehicleNotes(vehicleId) {
     });
 }
 function getVehicleServiceRecords(vehicleId) {
-    $.get(`/Vehicle/GetServiceRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetServiceRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#servicerecord-tab-pane").html(data);
             restoreScrollPosition();
@@ -136,7 +136,7 @@ function getVehicleServiceRecords(vehicleId) {
     });
 }
 function getVehiclePlanRecords(vehicleId) {
-    $.get(`/Vehicle/GetPlanRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetPlanRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#plan-tab-pane").html(data);
             restoreScrollPosition();
@@ -145,7 +145,7 @@ function getVehiclePlanRecords(vehicleId) {
     });
 }
 function getVehicleOdometerRecords(vehicleId) {
-    $.get(`/Vehicle/GetOdometerRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetOdometerRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#odometer-tab-pane").html(data);
             restoreScrollPosition();
@@ -154,7 +154,7 @@ function getVehicleOdometerRecords(vehicleId) {
     });
 }
 function getVehicleSupplyRecords(vehicleId) {
-    $.get(`/Vehicle/GetSupplyRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetSupplyRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#supply-tab-pane").html(data);
             restoreScrollPosition();
@@ -163,7 +163,7 @@ function getVehicleSupplyRecords(vehicleId) {
     });
 }
 function getVehicleUpgradeRecords(vehicleId) {
-    $.get(`/Vehicle/GetUpgradeRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetUpgradeRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#upgrade-tab-pane").html(data);
             restoreScrollPosition();
@@ -172,7 +172,7 @@ function getVehicleUpgradeRecords(vehicleId) {
     });
 }
 function getVehicleGasRecords(vehicleId) {
-    $.get(`/Vehicle/GetGasRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetGasRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#gas-tab-pane").html(data);
             restoreScrollPosition();
@@ -181,7 +181,7 @@ function getVehicleGasRecords(vehicleId) {
     });
 }
 function getVehicleCollisionRecords(vehicleId) {
-    $.get(`/Vehicle/GetCollisionRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetCollisionRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#accident-tab-pane").html(data);
             restoreScrollPosition();
@@ -190,7 +190,7 @@ function getVehicleCollisionRecords(vehicleId) {
     });
 }
 function getVehicleTaxRecords(vehicleId) {
-    $.get(`/Vehicle/GetTaxRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetTaxRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#tax-tab-pane").html(data);
             restoreScrollPosition();
@@ -198,7 +198,7 @@ function getVehicleTaxRecords(vehicleId) {
     });
 }
 function getVehicleReminders(vehicleId) {
-    $.get(`/Vehicle/GetReminderRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetReminderRecordsByVehicleId?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#reminder-tab-pane").html(data);
             restoreScrollPosition();
@@ -207,7 +207,7 @@ function getVehicleReminders(vehicleId) {
     });
 }
 function getVehicleReport(vehicleId) {
-    $.get(`/Vehicle/GetReportPartialView?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetReportPartialView?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#report-tab-pane").html(data);
             getVehicleHaveImportantReminders(vehicleId);
@@ -215,7 +215,7 @@ function getVehicleReport(vehicleId) {
     })
 }
 function editVehicle(vehicleId) {
-    $.get(`/Vehicle/GetEditVehiclePartialViewById?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetEditVehiclePartialViewById?vehicleId=${vehicleId}`, function (data) {
         if (data) {
             $("#editVehicleModalContent").html(data);
             initTagSelector($("#inputTag"), true);
@@ -264,7 +264,7 @@ function showAddReminderModal(reminderModalInput) {
 }
 function getVehicleHaveImportantReminders(vehicleId) {
     setTimeout(function () {
-        $.get(`/Vehicle/GetVehicleHaveUrgentOrPastDueReminders?vehicleId=${vehicleId}`, function (data) {
+        $.get(`${pathBase}/Vehicle/GetVehicleHaveUrgentOrPastDueReminders?vehicleId=${vehicleId}`, function (data) {
             if (data) {
                 $(".reminderBell").removeClass("bi-bell");
                 $(".reminderBell").addClass("bi-bell-fill");
@@ -337,7 +337,7 @@ function moveRecord(recordId, source, dest) {
     });
 }
 function showRecurringReminderSelector(descriptionFieldName, noteFieldName) {
-    $.get(`/Vehicle/GetRecurringReminderRecordsByVehicleId?vehicleId=${GetVehicleId().vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetRecurringReminderRecordsByVehicleId?vehicleId=${GetVehicleId().vehicleId}`, function (data) {
         if (data) {
             //prompt user to select a recurring reminder
             Swal.fire({
@@ -626,7 +626,7 @@ function getAndValidateSelectedRecurringReminder() {
     }
 }
 function getLastOdometerReadingAndIncrement(odometerFieldName) {
-    $.get(`/Vehicle/GetMaxMileage?vehicleId=${GetVehicleId().vehicleId}`, function (currentOdometer) {
+    $.get(`${pathBase}/Vehicle/GetMaxMileage?vehicleId=${GetVehicleId().vehicleId}`, function (currentOdometer) {
         let additionalHtml = isNaN(currentOdometer) || currentOdometer == 0 ? '' : `<span>Current Odometer: ${currentOdometer}</span><br/>`;
         Swal.fire({
             title: 'Increment Last Reported Odometer Reading',

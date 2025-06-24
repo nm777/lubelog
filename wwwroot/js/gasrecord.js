@@ -1,5 +1,5 @@
 ﻿function showAddGasRecordModal() {
-    $.get(`/Vehicle/GetAddGasRecordPartialView?vehicleId=${GetVehicleId().vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetAddGasRecordPartialView?vehicleId=${GetVehicleId().vehicleId}`, function (data) {
         if (data) {
             $("#gasRecordModalContent").html(data);
             //initiate datepicker
@@ -22,7 +22,7 @@ function showEditGasRecordModal(gasRecordId, nocache) {
             }
         }
     }
-    $.get(`/Vehicle/GetGasRecordForEditById?gasRecordId=${gasRecordId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetGasRecordForEditById?gasRecordId=${gasRecordId}`, function (data) {
         if (data) {
             $("#gasRecordModalContent").html(data);
             //initiate datepicker
@@ -51,7 +51,7 @@ function deleteGasRecord(gasRecordId) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteGasRecordById?gasRecordId=${gasRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteGasRecordById?gasRecordId=${gasRecordId}`, function (data) {
                 if (data) {
                     hideAddGasRecordModal();
                     successToast("Gas Record deleted");

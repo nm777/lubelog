@@ -1,11 +1,11 @@
 ﻿function showExtraFieldModal() {
-    $.get(`/Home/GetExtraFieldsModal?importMode=0`, function (data) {
+    $.get(`${pathBase}/Home/GetExtraFieldsModal?importMode=0`, function (data) {
         $("#extraFieldModalContent").html(data);
         $("#extraFieldModal").modal('show');
     });
 }
 function showServerConfigModal() {
-    $.get(`/Home/GetServerConfiguration`, function (data) {
+    $.get(`${pathBase}/Home/GetServerConfiguration`, function (data) {
         $("#serverConfigModalContent").html(data);
         $("#serverConfigModal").modal('show');
     });
@@ -208,7 +208,7 @@ function loadSponsors() {
 }
 
 function showTranslationEditor() {
-    $.get(`/Home/GetTranslatorEditor?userLanguage=${$("#defaultLanguage").val()}`, function (data) {
+    $.get(`${pathBase}/Home/GetTranslatorEditor?userLanguage=${$("#defaultLanguage").val()}`, function (data) {
         $('#translationEditorModalContent').html(data);
         $('#translationEditorModal').modal('show');
     })
@@ -288,7 +288,7 @@ function hideTranslationDownloader() {
 }
 function downloadTranslation(continent, name) {
     sloader.show();
-    $.get(`/Home/DownloadTranslation?continent=${continent}&name=${name}`, function (data) {
+    $.get(`${pathBase}/Home/DownloadTranslation?continent=${continent}&name=${name}`, function (data) {
         sloader.hide();
         if (data) {
             successToast("Translation Downloaded");

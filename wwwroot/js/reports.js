@@ -88,7 +88,7 @@ function getSavedReportParameters() {
 }
 function generateVehicleHistoryReport() {
     var vehicleId = GetVehicleId().vehicleId;
-    $.get(`/Vehicle/GetReportParameters`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetReportParameters`, function (data) {
         if (data) {
             //prompt user to select columns
             Swal.fire({
@@ -114,7 +114,7 @@ function generateVehicleHistoryReport() {
                     //save params in sessionStorage
                     sessionStorage.setItem(`${vehicleId}_selectedReportColumns`, JSON.stringify(result.value.selectedColumnsData));
                     //post params
-                    $.post(`/Vehicle/GetVehicleHistory?vehicleId=${vehicleId}`, {
+                    $.post(`${pathBase}/Vehicle/GetVehicleHistory?vehicleId=${vehicleId}`, {
                         reportParameter: result.value.selectedColumnsData
                     }, function (data) {
                         if (data) {
@@ -290,7 +290,7 @@ function updateReminderPie() {
     var vehicleId = GetVehicleId().vehicleId;
     var daysToAdd = $("#reminderOption").val();
     setSelectedMetrics();
-    $.get(`/Vehicle/GetReminderMakeUpByVehicle?vehicleId=${vehicleId}`, { daysToAdd: daysToAdd }, function (data) {
+    $.get(`${pathBase}/Vehicle/GetReminderMakeUpByVehicle?vehicleId=${vehicleId}`, { daysToAdd: daysToAdd }, function (data) {
         $("#reminderMakeUpReportContent").html(data);
     });
 }
@@ -298,14 +298,14 @@ function updateReminderPie() {
 function yearUpdated() {
     var vehicleId = GetVehicleId().vehicleId;
     var year = getYear();
-    $.get(`/Vehicle/GetCostMakeUpForVehicle?vehicleId=${vehicleId}`, { year: year }, function (data) {
+    $.get(`${pathBase}/Vehicle/GetCostMakeUpForVehicle?vehicleId=${vehicleId}`, { year: year }, function (data) {
         $("#costMakeUpReportContent").html(data);
         refreshBarChart();
     })
 }
 function refreshCollaborators() {
     var vehicleId = GetVehicleId().vehicleId;
-    $.get(`/Vehicle/GetCollaboratorsForVehicle?vehicleId=${vehicleId}`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetCollaboratorsForVehicle?vehicleId=${vehicleId}`, function (data) {
         $("#collaboratorContent").html(data);
     });
 }
@@ -372,7 +372,7 @@ function exportAttachments() {
 function showDataTable(elemClicked) {
     var vehicleId = GetVehicleId().vehicleId;
     var year = getYear();
-    $.get(`/Vehicle/GetCostTableForVehicle?vehicleId=${vehicleId}`, { year: year }, function (data) {
+    $.get(`${pathBase}/Vehicle/GetCostTableForVehicle?vehicleId=${vehicleId}`, { year: year }, function (data) {
         $("#vehicleDataTableModalContent").html(data);
         $("#vehicleDataTableModal").modal('show');
         if (elemClicked.length > 0) {

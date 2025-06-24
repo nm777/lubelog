@@ -27,7 +27,7 @@ function loadSettings() {
     });
 }
 function getVehicleSupplyRecords() {
-    $.get(`/Vehicle/GetSupplyRecordsByVehicleId?vehicleId=0`, function (data) {
+    $.get(`${pathBase}/Vehicle/GetSupplyRecordsByVehicleId?vehicleId=0`, function (data) {
         if (data) {
             $("#supply-tab-pane").html(data);
             restoreScrollPosition();
@@ -66,7 +66,7 @@ function getVehicleCalendarEvents() {
 }
 function showCalendarReminderModal(id) {
     event.stopPropagation();
-    $.get(`/Home/ViewCalendarReminder?reminderId=${id}`, function (data) {
+    $.get(`${pathBase}/Home/ViewCalendarReminder?reminderId=${id}`, function (data) {
         if (data) {
             $("#reminderRecordCalendarModalContent").html(data);
             $("#reminderRecordCalendarModal").modal('show');
@@ -98,7 +98,7 @@ function generateReminderItem(id, urgency, description) {
 }
 function markDoneCalendarReminderRecord(reminderRecordId, e) {
     event.stopPropagation();
-    $.post(`/Vehicle/PushbackRecurringReminderRecord?reminderRecordId=${reminderRecordId}`, function (data) {
+    $.post(`${pathBase}/Vehicle/PushbackRecurringReminderRecord?reminderRecordId=${reminderRecordId}`, function (data) {
         if (data) {
             hideCalendarReminderModal();
             successToast("Reminder Updated");
@@ -121,7 +121,7 @@ function deleteCalendarReminderRecord(reminderRecordId, e) {
         confirmButtonColor: "#dc3545"
     }).then((result) => {
         if (result.isConfirmed) {
-            $.post(`/Vehicle/DeleteReminderRecordById?reminderRecordId=${reminderRecordId}`, function (data) {
+            $.post(`${pathBase}/Vehicle/DeleteReminderRecordById?reminderRecordId=${reminderRecordId}`, function (data) {
                 if (data) {
                     hideCalendarReminderModal();
                     successToast("Reminder Deleted");
