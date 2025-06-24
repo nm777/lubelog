@@ -4,6 +4,7 @@
 @{
     var userLanguage = config.GetServerLanguage();
     var openRegistrationEnabled = config.GetServerOpenRegistration();
+    var pathBase = config.PathBase;
 }
 @model string
 @{
@@ -47,7 +48,8 @@
                                         "Register")</button>
             </div>
             <div class="d-grid">
-                <a href="/Login/Index" class="btn btn-link mt-2">@translator.Translate(userLanguage,
+                <a href="@pathBase/Login/Index"
+                    class="btn btn-link mt-2">@translator.Translate(userLanguage,
                                         "Back to Login")</a>
             </div>
         </div>

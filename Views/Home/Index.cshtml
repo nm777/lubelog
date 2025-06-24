@@ -5,6 +5,7 @@
     var userConfig = config.GetUserConfig(User);
     var enableAuth = userConfig.EnableAuth;
     var userLanguage = userConfig.UserLanguage;
+    var pathBase = config.PathBase;
 }
 @model string
 @{
@@ -40,7 +41,7 @@
             @if (User.IsInRole(nameof(UserData.IsAdmin)))
             {
                 <li class="nav-item" role="presentation">
-                    <a class="dropdown-item" href="/Admin"><span class="display-3 ms-2"><i class="bi bi-people me-2"></i>@translator.Translate(userLanguage,"Admin Panel")</span></a>
+                    <a class="dropdown-item" href="@pathBase/Admin"><span class="display-3 ms-2"><i class="bi bi-people me-2"></i>@translator.Translate(userLanguage,"Admin Panel")</span></a>
                 </li>
             }
             @if (User.IsInRole(nameof(UserData.IsRootUser)))
@@ -96,7 +97,7 @@
                     @if (User.IsInRole(nameof(UserData.IsAdmin)))
                     {
                         <li>
-                            <a class="dropdown-item" href="/Admin"><i class="bi bi-people me-2"></i>@translator.Translate(userLanguage,"Admin Panel")</a>
+                            <a class="dropdown-item" href="@pathBase/Admin"><i class="bi bi-people me-2"></i>@translator.Translate(userLanguage,"Admin Panel")</a>
                         </li>
                     }
                     @if (User.IsInRole(nameof(UserData.IsRootUser)))

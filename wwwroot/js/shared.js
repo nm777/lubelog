@@ -44,7 +44,7 @@ function infoToast(message) {
     })
 }
 function viewVehicle(vehicleId) {
-    window.location.href = `/Vehicle/Index?vehicleId=${vehicleId}`;
+    window.location.href = `${pathBase}/Vehicle/Index?vehicleId=${vehicleId}`;
 }
 function saveVehicle(isEdit) {
     var vehicleId = getVehicleModelData().id;
